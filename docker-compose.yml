@@ -2,7 +2,7 @@ services:
   backend:
     build: 
       context: ./django
-    command: gunicorn core.wsgi --bind 0.0.0.0:8000
+    # command: command
     ports:
       - 8000:8000
     networks:
@@ -23,6 +23,8 @@ services:
     volumes:
       - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
       - react_build:/var/www/react
+      - ./django/staticfiles:/var/www/django/staticfiles:ro
+      - ./django/media:/var/www/django/media:ro
     depends_on:
       - backend
       - frontend
